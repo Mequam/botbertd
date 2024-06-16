@@ -10,11 +10,14 @@ license=('MIT')
 depends=('python')
 makedepends=('git' 'python-pip')
 optdepends=()
+_start_script="${pkgname}-${pkgver}-start.sh"
 _commit=c9adf2f1985449e837906bcb7c5ae8039962fbd8
 source=(
     "${pkgname}-${pkgver}::git+https://github.com/Mequam/botbert.git#commit=$_commit"
+    $_start_script
 )
-sha256sums=('30faefdf41a056d155dec72da7c7fe467d1ab11a9d674197725b3ed6c3bff2b4')
+sha256sums=('30faefdf41a056d155dec72da7c7fe467d1ab11a9d674197725b3ed6c3bff2b4'
+            '3b403b11600f57bc9dffaf9e1e6fdff23ae9bc269c0ebe8e68b01fdc2c422553')
 #prepare() {
 #    #cd "${pkgname}-${pkgver}"
 #    #git clone "${pkgname}-${pkgver}" ${srcdir}
@@ -39,8 +42,8 @@ build() {
 package() {
     #install -Dm644 -t "${pkgdir}/usr/lib/systemd/system" "${pkgname}.service"
     mkdir -p "${pkgdir}/opt/botbertd"
-    cp -r "${pkgname}-${pkgver}"/* "${pkgdir}/opt/botbertd"
-    install -t "${pkgdir}/opt/borbertd" "${pkgname}-${pkgver}-start.sh"
+    cp -r "${pkgname}-${pkgver}"/* "${pkgname}-${pkgver}"/.venv "${pkgdir}/opt/botbertd"
+    install -Dm755 -t "${pkgdir}/usr/bin/botbertd" $_start_script
 
     #install -D -t "${pkgdir}/opt/botbertd" "${pkgname}-${pkgver}/"
     #install -Dm755 -t "${pkgdir}/usr/bin" "${pkgname}-${pkgver}/target/release/${pkgname}"
