@@ -1,0 +1,5 @@
+#this is the environment variable file that 
+#the service reads from
+#uncomment and place your token hear to confiure the server
+
+#DISCORD_TOKEN=your bot token

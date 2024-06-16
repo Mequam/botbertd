@@ -1,0 +1,12 @@
+[Unit]
+Description=start the botbert daemon
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/bash /usr/bin/botbertd
+EnvironmentFile=/etc/botbertd/env.txt
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
+
