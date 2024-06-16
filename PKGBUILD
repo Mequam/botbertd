@@ -43,7 +43,10 @@ package() {
     #install -Dm644 -t "${pkgdir}/usr/lib/systemd/system" "${pkgname}.service"
     mkdir -p "${pkgdir}/opt/botbertd"
     cp -r "${pkgname}-${pkgver}"/* "${pkgname}-${pkgver}"/.venv "${pkgdir}/opt/botbertd"
-    install -Dm755 -t "${pkgdir}/usr/bin/botbertd" $_start_script
+    
+    mkdir -p "${pkgdir}/usr/bin/"
+    cp $_start_script "${pkgdir}/usr/bin/botbertd"
+    chmod +x "${pkgdir}/usr/bin/botbertd"
 
     #install -D -t "${pkgdir}/opt/botbertd" "${pkgname}-${pkgver}/"
     #install -Dm755 -t "${pkgdir}/usr/bin" "${pkgname}-${pkgver}/target/release/${pkgname}"
