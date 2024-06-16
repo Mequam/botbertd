@@ -9,7 +9,6 @@ url="https://github.com/Mequam/botbert"
 license=('MIT')
 depends=('python')
 makedepends=('git' 'python-pip')
-optdepends=()
 
 
 _start_script="${pkgname}-${pkgver}-start.sh"
@@ -30,11 +29,6 @@ sha256sums=(
             '6415662e4127b9bb39f2e9d4f3d5f1e02a850f296e530d056b52081c86bf6f46'
             '633987eb0fb484558fddc3484726eafcb36a428d3ab9ad60c600209e49a22bcc'
            )
-#prepare() {
-#    #cd "${pkgname}-${pkgver}"
-#    #git clone "${pkgname}-${pkgver}" ${srcdir}
-#}
-
 build() {
    cd "${pkgname}-${pkgver}"
    
@@ -43,16 +37,7 @@ build() {
    source .venv/bin/activate
    pip install -r requirements.txt
 }
-###
-###check() {
-###    cd "${pkgname}-${pkgver}"
-###    export RUSTUP_TOOLCHAIN=stable
-###    export CARGO_TARGET_DIR=target
-###    cargo test --frozen
-###}
-###
 package() {
-    #install -Dm644 -t "${pkgdir}/usr/lib/systemd/system" "${pkgname}.service"
     mkdir -p "${pkgdir}/opt/botbertd"
     cp -r "${pkgname}-${pkgver}"/* "${pkgname}-${pkgver}"/.venv "${pkgdir}/opt/botbertd"
     
@@ -67,9 +52,5 @@ package() {
 
     mkdir -p "${pkgdir}/etc/botbertd/"
     cp $_env_variable_placeholder "${pkgdir}/etc/botbertd/env.txt"
-
-    #install -D -t "${pkgdir}/opt/botbertd" "${pkgname}-${pkgver}/"
-    #install -Dm755 -t "${pkgdir}/usr/bin" "${pkgname}-${pkgver}/target/release/${pkgname}"
-    #install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname}" "${pkgname}-${pkgver}/LICENSE"
 }
 
